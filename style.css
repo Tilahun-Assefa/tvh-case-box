@@ -1,11 +1,13 @@
 *{
     margin:0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 .container{
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     height: 100vh;
     justify-content: center;
@@ -16,7 +18,8 @@
 }
 
 h1{
-    font-size: 60px;
+    width: 100%;
+    font-size: 40px;
     color: white;
     font-family: Impact, Haettenschweler,"Arial Narrow Bold", sans-serif;
     letter-spacing: 4px;
@@ -45,7 +48,7 @@ h1{
     position: fixed;
     left: 50%;
     top: 30%;
-    height: 50%;
+    height: 60%;
     width: 400px;
     transform: translate(-50%);
     background-color: white;
@@ -107,4 +110,33 @@ label{
     visibility: hidden;
     opacity:0;
     top: 10%;
+}
+
+/* Mobile styles */
+@media only screen and (max-width:400px) {
+    body{
+        background-color: aquamarine;
+    }
+    
+}
+
+/* Tablet styles */
+@media only screen and (min-width:401px) and (max-width:960px) {
+    body{
+        background-color:beige;
+    }
+    h1{
+        font-size: 60px;
+    }
+}
+
+/* Desktop styles */
+@media only screen and (min-width:961px) {
+    body{
+        background-color:azure;
+    }
+    h1{
+        font-size: 60px;
+    }
+    
 }

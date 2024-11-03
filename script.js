@@ -27,24 +27,49 @@ function submitForm(e) {
 
     const formData = new FormData(formEl);
     formData.forEach(el => {
-        console.log(el)
+        console.log(el);
     });
     let case_box = formData.get("case_box");
     let item_box = formData.get("item_box");
-    console.log("item Box: ", item_box, " and Case Box: ", case_box);
+    let qty = formData.get('qty');
+    let selectedPlacement;
 
-    const itemBoxObj = itemBoxesArr.filter(el => el.boxName == item_box);
-    const caseBoxObj = caseBoxesArr.filter(el => el.boxName == case_box);
 
-    const arrBoxes = caseBoxesArr.map(cBox => calculateNumberOfBox(cBox, itemBoxObj[0]));
-    console.log(arrBoxes);
+    console.log("item Box: ", item_box, " Quantity: ", qty, " and Case Box: ", case_box);
 
-    const numOfBoxes = calculateNumberOfBox(caseBoxObj[0], itemBoxObj[0]);
-    result.innerHTML = numOfBoxes;
+    const itemBoxObj = itemBoxesArr.find(el => el.boxName === item_box);
+    const caseBoxObj = caseBoxesArr.find(el => el.boxName === case_box);
+
+    const arrPlacements = caseBoxesArr.map(cBox => {
+        return selectBetterPlacementOfBox(cBox, itemBoxObj)
+    });
+    console.log(arrPlacements);
+    let minDiff = qty;
+
+    caseBoxesArr.forEach((cb) => {
+        let placement = selectBetterPlacementOfBox(cb, itemBoxObj);
+        let num = placement.numOfItemBox;
+        if (num === qty) {
+            selectedPlacement = placement;
+            return;
+        }
+        if (num > qty && num - qty < minDiff) {
+            minDiff = num - qty;
+            selectedPlacement = placement;
+        }
+    });
+
+    // const numOfBoxes = selectBetterPlacementOfBox(caseBoxObj, itemBoxObj).numOfItemBox;
+    result.innerHTML = `Quantity: ${selectedPlacement.numOfItemBox} 
+    \n Placement ID: ${selectedPlacement.name} \n 
+    Box Type: ${selectedPlacement.caseBox.boxName}
+    Item box width placed on ${selectedPlacement.itemBox_width_dir}
+    Item box length placed on ${selectedPlacement.itemBox_length_dir}
+    Item box height placed on ${selectedPlacement.itemBox_height_dir} `;
 }
 
-function calculateNumberOfBox(caseBox, itemBox) {
-    let numBox = 0;
+function selectBetterPlacementOfBox(caseBox, itemBox) {
+    let maxNumBox = 0;
     let placementArr = [];
     //x-axis: width, y-axis: length, z-axis: height
     let numItemBox_case_height;
@@ -98,14 +123,14 @@ function calculateNumberOfBox(caseBox, itemBox) {
     placementArr.push(itemPlacement6);
 
     // console.log(placementArr);
-    // console.log("Num of Item boxes in placements", placementArr.map(p => p.maxNumOfItemBox))
-    numBox = Math.max(...(placementArr.map(p => p.maxNumOfItemBox)));
+    maxNumBox = Math.max(...(placementArr.map(p => p.numOfItemBox)));
 
+    let selectedPlacement = placementArr.find((pl) => pl.numOfItemBox === maxNumBox);
     // console.log("Max number of boxes in CaseBox", caseBox.boxName, "=", numBox, "of", itemBox.boxName, ", Extra space", caseBox.volume - numBox * itemBox.volume);
 
     // console.log("Case Box Width:", caseBox.width_x, "Case Box Length:", caseBox.length_y, "Case Box Height:", caseBox.height_z, "Box Volume:", caseBox.volume);
     // console.log("Item Box Width:", itemBox.width_x, "Item Box Length:", itemBox.length_y, "Item Box Height:", itemBox.height_z, "Item Box Volume:", itemBox.volume);
-    return numBox;
+    return selectedPlacement;
 }
 
 

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width= device-width, initial-scale=1.0, maximum-scale=1.0" />
     <title>TVH Casebox Determination</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -16,8 +17,9 @@
         <button class="btn">Click to enter the item and case box type</button>
     </div>
     <div class="popup-container active">
-        <h4>Enter Item Box Type and Case Box Type</h4>
+        <h4>Enter Item Box and Case Box Type</h4>
         <form id='formElem' method="post">
+
             <label for="item_box">Item Box</label>
             <select name="item_box" id="item-box-select" class="input">
                 <option value="">--Please choose an item box--</option>
@@ -30,6 +32,10 @@
                 <option value="CP018">CP018</option>
                 <option value="CP020">CP020</option>
             </select>
+            
+            <label for="qty">Item Quantity</label>
+            <input type="number" name="qty" class="input" placeholder="Enter quantity of items">
+
             <label for="case_box">Case Box:</label>
             <select name="case_box" id="case-box-select" class="input">
                 <option value="">--Please choose a case box--</option>
@@ -44,12 +50,15 @@
                 <option value="BX520">Bx520</option>
                 <option value="BX525">Bx525</option>
                 <option value="BX555">Bx555</option>
-
+                <option value="BX560">Bx560</option>
+                <option value="BX565">Bx565</option>
             </select>
             <button type="submit" class="popup-btn">Determine Qty of Item Boxes in Case Box</button>
         </form>
         <i class="fas fa-times fa-2x close-icon"></i>
-        <div id="res" class="input"></div>
+        <div>
+            <label>Number of Item boxes in Case Box are : <span id="res" class="input"></span></label>
+        </div>
     </div>
 
     <script type="module" src="script.js"></script>

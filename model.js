@@ -20,7 +20,7 @@ export class ItemPlacement {
         this.itemBox_height_dir = itemBox_height_dir;
     }
 
-    get maxNumOfItemBox() {
+    get numOfItemBox() {
         return this.numItemBox_Width * this.numItemBox_Length * this.numItemBox_Height;
     }
 }
