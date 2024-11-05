@@ -47,9 +47,9 @@ h1{
 .popup-container{
     position: fixed;
     left: 50%;
-    top: 30%;
-    height: 60%;
-    width: 400px;
+    top: 20%;
+    height: 70%;
+    width: 75%;
     transform: translate(-50%);
     background-color: white;
     display: flex;
@@ -138,5 +138,7 @@ label{
     h1{
         font-size: 60px;
     }
-    
+    .popup-container{
+        width: 700px;
+    }
 }

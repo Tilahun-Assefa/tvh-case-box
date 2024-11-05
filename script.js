@@ -31,41 +31,48 @@ function submitForm(e) {
     });
     let case_box = formData.get("case_box");
     let item_box = formData.get("item_box");
-    let qty = formData.get('qty');
+    let qty = +formData.get('qty');
     let selectedPlacement;
 
 
     console.log("item Box: ", item_box, " Quantity: ", qty, " and Case Box: ", case_box);
 
-    const itemBoxObj = itemBoxesArr.find(el => el.boxName === item_box);
-    const caseBoxObj = caseBoxesArr.find(el => el.boxName === case_box);
+    const itemBox = itemBoxesArr.find(el => el.boxName === item_box);
+    const caseBox = caseBoxesArr.find(el => el.boxName === case_box);
 
     const arrPlacements = caseBoxesArr.map(cBox => {
-        return selectBetterPlacementOfBox(cBox, itemBoxObj)
+        return selectBetterPlacementOfBox(cBox, itemBox)
     });
     console.log(arrPlacements);
-    let minDiff = qty;
+    let minDiff = +qty;
 
-    caseBoxesArr.forEach((cb) => {
-        let placement = selectBetterPlacementOfBox(cb, itemBoxObj);
+    for (let i = 0; i < caseBoxesArr.length; i++) {
+        let placement = selectBetterPlacementOfBox(caseBoxesArr[i], itemBox);
         let num = placement.numOfItemBox;
         if (num === qty) {
             selectedPlacement = placement;
-            return;
+            break;
         }
         if (num > qty && num - qty < minDiff) {
             minDiff = num - qty;
             selectedPlacement = placement;
         }
-    });
+    }
 
-    // const numOfBoxes = selectBetterPlacementOfBox(caseBoxObj, itemBoxObj).numOfItemBox;
-    result.innerHTML = `Quantity: ${selectedPlacement.numOfItemBox} 
-    \n Placement ID: ${selectedPlacement.name} \n 
-    Box Type: ${selectedPlacement.caseBox.boxName}
-    Item box width placed on ${selectedPlacement.itemBox_width_dir}
-    Item box length placed on ${selectedPlacement.itemBox_length_dir}
-    Item box height placed on ${selectedPlacement.itemBox_height_dir} `;
+    const numOfBoxes = selectBetterPlacementOfBox(caseBox, itemBox).numOfItemBox;
+
+    if (selectedPlacement != null || undefined) {
+        result.innerHTML = `Best Set Up <br>
+        Quantity: ${selectedPlacement.numOfItemBox} <br>
+        Placement ID: ${selectedPlacement.name} <br>
+        Box Type: ${selectedPlacement.caseBox.boxName}<br>
+        Item box width placed along ${selectedPlacement.itemBox_width_dir}<br>
+        Item box length placed along ${selectedPlacement.itemBox_length_dir}<br>
+        Item box height placed along ${selectedPlacement.itemBox_height_dir} </br>`;
+    } else if(case_box != null || undefined){
+        result.innerHTML = `Best Set Up can not be determine please try one by one.  <br>     
+        Case box: ${caseBox.boxName} can hold ${numOfBoxes} of ${itemBox.boxName} `;
+    }    
 }
 
 function selectBetterPlacementOfBox(caseBox, itemBox) {
