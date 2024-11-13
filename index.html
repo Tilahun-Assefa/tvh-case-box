@@ -17,11 +17,10 @@
         <button class="btn">Click to enter the item and case box type</button>
     </div>
     <div class="popup-container active">
-        <h4>Enter Item Box and Case Box Type</h4>
+        <h4>Select Item Box and Case Box</h4>
         <form id='formElem' method="post">
-
             <label for="item_box">Item Box</label>
-            <select name="item_box" id="item-box-select" class="input">
+            <select name="item_box" id="item-box-select" class="input" required>
                 <option value="">--Please choose an item box--</option>
                 <option value="CP002">CP002</option>
                 <option value="CP004">CP004</option>
@@ -32,12 +31,12 @@
                 <option value="CP018">CP018</option>
                 <option value="CP020">CP020</option>
             </select>
-            
+
             <label for="qty">Item Quantity</label>
-            <input type="number" name="qty" class="input" placeholder="Enter quantity of items">
+            <input type="number" name="qty" class="input" placeholder="Enter quantity of items" required>
 
             <label for="case_box">Case Box:</label>
-            <select name="case_box" id="case-box-select" class="input" >
+            <select name="case_box" id="case-box-select" class="input" required>
                 <option value="">--Please choose a case box--</option>
                 <option value="BX007">Bx007</option>
                 <option value="BX009">Bx009</option>
@@ -53,12 +52,16 @@
                 <option value="BX560">Bx560</option>
                 <option value="BX565">Bx565</option>
             </select>
-            <button type="submit" class="popup-btn">Determine Qty of Item Boxes in Case Box</button>
+            <div class="popup-btn-container">
+                <button type="submit" class="popup-btn">Determine Qty of Item Boxes in Case Box</button>
+            </div>
         </form>
         <i class="fas fa-times fa-2x close-icon"></i>
-        <div>
-            <label>Number of Item boxes in Case Box are : <p id="res" class="input"></p></label>
-        </div>
+    </div>
+    <div class="res-container active">
+        <h4>Item boxes in Case Box </h4>
+        <p id="res"></p>
+        <i class="fas fa-times fa-2x res-close-icon"></i>
     </div>
 
     <script type="module" src="script.js"></script>
