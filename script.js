@@ -153,12 +153,15 @@ const cp002 = new Box("CP002", 1.25, 1.25, 2);
 const cp004 = new Box("CP004", 2, 1.875, 2.625);
 const cp005 = new Box("CP005", 2.25, 1.0625, 3.4375);
 const cp008 = new Box("CP008", 3, 2, 3);
-const cp009 = new Box("CP009", 1.25, 1.25, 2);
-const cp017 = new Box("CP017", 2, 1.875, 2.625);
-const cp018 = new Box("CP018", 2.25, 1.0625, 3.4375);
-const cp020 = new Box("CP020", 3, 2, 3);
+const cp009 = new Box("CP009", 3.625, 3.125, 4.3125);
+const cp013 = new Box("CP013", 7.5, 2.5, 2);
+const cp014 = new Box("CP014", 5, 1.75, 5);
+const cp016 = new Box("CP016", 5, 2.5, 5);
+const cp017 = new Box("CP017", 3, 5, 0.5625, 4); //Belt sleeve
+const cp018 = new Box("CP018", 3.5, 1.0625, 4); //Belt sleeve
+const cp020 = new Box("CP020", 2.375, 1.825, 3.0625);
 
-const itemBoxesArr = [cp002, cp004, cp005, cp008, cp009, cp017, cp018, cp018, cp020];
+const itemBoxesArr = [cp002, cp004, cp005, cp008, cp009, cp013, cp014, cp016, cp020];
 
 //Case boxes
 const bx007 = new Box("BX007", 8, 8, 8);
@@ -167,6 +170,7 @@ const bx011 = new Box("BX011", 11.5, 5.5, 5);
 const bx015 = new Box("BX015", 18, 12, 12);
 const bx22d = new Box("BX22D", 5.25, 4.25, 3.125);
 const bx030 = new Box("BX030", 13, 13, 4.625);
+const bx032 = new Box("BX032", 21.75, 13.375, 7.5);
 const bx510 = new Box("BX510", 6, 6, 4);
 const bx515 = new Box("BX515", 7, 7, 5);
 const bx520 = new Box("BX520", 12, 8, 8);
@@ -174,5 +178,5 @@ const bx525 = new Box("BX525", 15, 15, 8);
 const bx555 = new Box("BX555", 9, 5, 4);
 const bx560 = new Box("BX560", 12, 6, 3);
 const bx565 = new Box("BX565", 15, 9, 4);
-const caseBoxesArr = [bx007, bx009, bx011, bx015, bx22d, bx030, bx510, bx515, bx520, bx525, bx555, bx560, bx565];
+const caseBoxesArr = [bx007, bx009, bx011, bx015, bx22d, bx030, bx032, bx510, bx515, bx520, bx525, bx555, bx560, bx565];
 
