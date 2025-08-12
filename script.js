@@ -71,18 +71,18 @@ function selectCaseBox(itemBox, qty) {
         return { name: el.caseBox.boxName, qty: el.numOfItemBox }
     }
     ));
-    let qtyDiff = arrPlacements[0].numOfItemBox - qty;
-    let minDiff = qtyDiff >= 0 ? qtyDiff : 999;
+    let minDiff = Math.abs(arrPlacements[0].numOfItemBox - qty);
     let selectedPlacement = arrPlacements[0];
 
     for (let i = 0; i < arrPlacements.length; i++) {
         let num = arrPlacements[i].numOfItemBox;
+        let diff= Math.abs(num - qty);
         if (num === qty) {
             selectedPlacement = arrPlacements[i];
             break;
         }
-        if (num > qty && num - qty < minDiff) {
-            minDiff = num - qty;
+        if (diff < minDiff) {
+            minDiff = diff;
             selectedPlacement = arrPlacements[i];
         }
     }
@@ -194,6 +194,8 @@ const cp009 = new Box("CP009", 3.626, 3.127, 4.3125);
 const cp013 = new Box("CP013", 3.125, 2.375, 8.025); // modified size 
 const cp014 = new Box("CP014", 5.25, 2, 5.3); //modified size(measured)
 const cp016 = new Box("CP016", 5, 2.5, 5);
+const cp016M = new Box("CP016", 5.1875, 2.7, 5.34); //Modified
+
 const cp017 = new Box("CP017", 3, 5, 0.5625, 4); //Belt sleeve
 const cp018 = new Box("CP018", 3.5, 1.0625, 4); //Belt sleeve
 const cp020 = new Box("CP020", 2.375, 1.825, 3.0625);
